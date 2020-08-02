@@ -1,0 +1,10 @@
+[target.riscv64gc-unknown-none-elf]
+# runner = "qemu-system-riscv64 -nographic -machine virt -cpu rv64 -smp 3 -m 128M -bios none -kernel"
+runner = "qemu-system-riscv64 -nographic -machine virt -cpu rv64 -serial mon:stdio -bios none -kernel"
+# runner = "qemu-system-riscv64 -machine virt -cpu rv64 -d guest_errors,unimp -smp 4 -m 128M -drive if=none,format=raw,file=hdd.dsk,id=foo -device virtio-blk-device,scsi=off,drive=foo -serial mon:stdio -bios none -device virtio-rng-device -device virtio-gpu-device -device virtio-net-device -device virtio-tablet-device -device virtio-keyboard-device -kernel "
+
+[build]
+target = "riscv64gc-unknown-none-elf"
+rustflags = [
+  "-C", "link-arg=-Tlinker.ld",
+]
