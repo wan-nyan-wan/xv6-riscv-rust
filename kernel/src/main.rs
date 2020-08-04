@@ -5,11 +5,12 @@
 
 use core::fmt::Write;
 
-#[no_mangle]
-pub static mut STACK0: [u8; 4096 * 3] = [0; 4096 * 3];
+pub mod assembly;
+pub mod arch;
+pub mod uart;
 
 #[no_mangle]
-extern "C" fn eh_personality() {}
+pub static mut STACK0: [u8; 4096 * 3] = [0; 4096 * 3];
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
@@ -34,7 +35,3 @@ pub fn panic(_info: &PanicInfo) -> ! {
 pub fn abort() -> ! {
     loop {}
 }
-
-pub mod assembly;
-pub mod arch;
-pub mod uart;

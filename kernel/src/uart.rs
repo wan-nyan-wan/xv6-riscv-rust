@@ -1,4 +1,4 @@
-use core::{convert::TryInto,fmt::{Error, Write}};
+use core::{fmt::{Error, Write}};
 
 pub struct Uart {
     base: u64,
@@ -51,7 +51,7 @@ impl Uart {
     }
 
     pub fn put(&mut self, c: u8) {
-        while((self.read_reg(LSR) & (1 << 5)) == 0) {}
+        while (self.read_reg(LSR) & (1 << 5)) == 0 {}
         self.write_reg(THR, c);
     }
 
